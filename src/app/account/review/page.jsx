@@ -1,15 +1,14 @@
-"use client"
+// app/account/review/page.jsx
+import { Suspense } from "react";
+import ReviewClient from "./review-client";
 
-import MainLayout from '@/components/layout/main'
-import UserReviewManager from '@/components/user/ReviewManager'
-import React from 'react'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-function page() {
+export default function Page() {
   return (
-    <MainLayout>
-        <UserReviewManager />
-    </MainLayout>
-  )
+    <Suspense fallback={<div className="p-4">Loading reviews…</div>}>
+      <ReviewClient />
+    </Suspense>
+  );
 }
-
-export default page

@@ -1,17 +1,14 @@
-"use client"
+// app/account/payments/page.jsx
+import { Suspense } from "react";
+import PaymentsClient from "./payments-client";
 
-import UserLayout from '@/components/layout/UserLayout'
-import PaymentHistory from '@/components/user/PaymentHistory'
-import useRouteGuard from '@/hooks/routeGuard';
-import React from 'react'
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-function page() {
-    useRouteGuard();
+export default function Page() {
   return (
-    <UserLayout>
-        <PaymentHistory />
-    </UserLayout>
-  )
+    <Suspense fallback={<div className="p-4">Loading payments…</div>}>
+      <PaymentsClient />
+    </Suspense>
+  );
 }
-
-export default page
