@@ -29,7 +29,7 @@ import { CouponCard } from "./CouponCard";
 import { useCartStore } from "@/store/useCartStore";
 
 const stripePromise = loadStripe(
-  "pk_test_51OcMkyERlYSb0OFi7sJgPUyralDr3AxN4wVcAgZpczRNFlTOEgejTTklmVTNCf0IPFxxazRSIHmDZVO7x5bhcsBN00gmHIOqKH"
+  "pk_test_51Ro2MqP3quUnX0kChc4SaEskLqyKysCalhsSElUj1eEBd5euCjlbLxx22ISJhKfepy2vuTVLDMGQmcmUrkS8SpP400RIU8SAK1"
 );
 
 const PaymentMethodList = [
