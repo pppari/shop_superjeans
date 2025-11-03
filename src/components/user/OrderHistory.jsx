@@ -266,7 +266,7 @@ const OrderHistory = () => {
                                   >
                                     <img
                                       src={mainColorImg(
-                                        item.productId._id,
+                                        item.productId?._id,
                                         item.productColorId.main_img
                                       )}
                                       alt="Product"
@@ -274,7 +274,7 @@ const OrderHistory = () => {
                                     />
                                     <div className="flex-1">
                                       <Link
-                                        href={`/product/${item.productId._id}`}
+                                        href={`/product/${item.productId?._id}`}
                                         target="_blank"
                                         className="font-medium text-gray-900"
                                       >
@@ -308,13 +308,13 @@ const OrderHistory = () => {
                                               className="mt-2"
                                               disabled={isItemReviewed(
                                                 order._id,
-                                                item.productId._id,
+                                                item.productId?._id,
                                                 item.productColorId._id
                                               )}
                                             >
                                               {isItemReviewed(
                                                 order._id,
-                                                item.productId._id,
+                                                item.productId?._id,
                                                 item.productColorId._id
                                               )
                                                 ? "รีวิวแล้ว"
@@ -324,11 +324,11 @@ const OrderHistory = () => {
                                           <DialogContent className="max-w-md rounded-2xl p-6">
                                             <DialogHeader>
                                               <DialogTitle className="text-base">
-                                                รีวิว {item.productId.name}
+                                                รีวิว {item.productId?.name}
                                               </DialogTitle>
                                             </DialogHeader>
                                             <ReviewForm
-                                              productId={item.productId._id}
+                                              productId={item.productId?._id}
                                               productColorId={
                                                 item.productColorId._id
                                               }
