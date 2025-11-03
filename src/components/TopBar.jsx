@@ -43,7 +43,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { useCartStore } from "@/store/useCartStore";
 
 export default function Topbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const token = getToken();
   const cartCount = useCartStore((state) => state.count);
@@ -157,7 +157,7 @@ export default function Topbar() {
                     <p>ตั้งค่ารหัสผ่าน</p>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="group p-1 border-b border-gray-300">
+                <DropdownMenuItem className="group p-1 border-b-none border-gray-300">
                   <Link
                     href="/signout"
                     className="flex space-x-2 w-full group-hover:!bg-orange-300 group-hover:!text-white duration-300  p-1 items-center rounded-md"
