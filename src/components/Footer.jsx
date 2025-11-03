@@ -16,17 +16,11 @@ export default function Footer() {
           <Link href="/">
             <Image src="/logo.png" alt="Logo" width={150} height={40} />
           </Link>
-          <p className="text-sm mt-4">
-            88/7 Sukhumvit Soi 55 (Thonglor)
-          </p>
-          <p className="text-sm">
-Khlong Tan Nuea, Watthana Bangkok
-          </p>
-          <p className="text-sm mb-2">
-            10110, Thailand
-          </p>
+          <p className="text-sm mt-4">89 ถ.พิทักษ์ประชา ต.เขาสวนกวาง</p>
+          <p className="text-sm">อ.เขาสวนกวาง จ.ขอนแก่น</p>
+          <p className="text-sm mb-2">40280, ประเทศไทย</p>
           <Link href="tel:+6621234567" className="text-sm">
-          +66 2 123 4567
+            +66 8 0325 7699
           </Link>
         </div>
 
@@ -54,7 +48,10 @@ Khlong Tan Nuea, Watthana Bangkok
         <div>
           <h4 className="font-semibold text-black mb-4">ช่องทางติดตาม</h4>
           <div className="flex space-x-4">
-            <Link href="#" className={buttonVariants({variant: "outline", size: "icon"})}>
+            <Link
+              href="#"
+              className={buttonVariants({ variant: "outline", size: "icon" })}
+            >
               <Facebook size={24} className="hover:text-black" />
             </Link>
           </div>
@@ -62,13 +59,16 @@ Khlong Tan Nuea, Watthana Bangkok
       </div>
 
       <div className="mt-10 flex justify-between text-sm border-t border-gray-800 pt-6">
-        <p>&copy; {new Date().getFullYear()} Super Jeans Furniture. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Super Jeans Furniture. All rights
+          reserved.
+        </p>
         <div className="flex space-x-1">
-        <Link href="/privacy">Privacy Policy</Link> 
-        <p>|</p>
-        <Link href="/terms">Terms Of Services</Link>
-        <p>|</p>
-        <Link href="/cookie">Cookies Policy</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <p>|</p>
+          <Link href="/terms">Terms Of Services</Link>
+          <p>|</p>
+          <Link href="/cookie">Cookies Policy</Link>
         </div>
       </div>
     </footer>
