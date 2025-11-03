@@ -330,30 +330,30 @@ const CartPage = () => {
                     >
                       <img
                         src={mainColorImg(
-                          productId._id,
+                          productId?._id,
                           productColorId.main_img
                         )}
-                        alt={productId.name}
+                        alt={productId?.name}
                         className="w-24 h-24 object-cover rounded-md"
                       />
                       <div className="flex flex-col justify-between w-full">
                         <div className="flex justify-between items-start">
                           <div>
                             <h2 className="font-semibold text-base">
-                              {productId.name}
+                              {productId?.name}
                             </h2>
                             <p className="text-sm text-gray-500 mt-1">
-                              Color: {productColorId.name}
+                              Color: {productColorId?.name}
                             </p>
                             <p className="text-sm text-gray-400 mt-1">
-                              SKU: {productId.sku}
+                              SKU: {productId?.sku}
                             </p>
                           </div>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="text-red-500"
-                            onClick={() => handleRemoveItem(productColorId._id)}
+                            onClick={() => handleRemoveItem(productColorId?._id)}
                           >
                             <Trash2 size={18} />
                           </Button>
