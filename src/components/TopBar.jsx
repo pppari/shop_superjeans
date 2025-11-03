@@ -110,46 +110,58 @@ export default function Topbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="end"
-                className={"border-none max-w-xs w-full !shadow-2xs"}
+                className={"border-none max-w-sm w-[12rem] shadow-2xl"}
               >
                 <DropdownMenuItem className="group p-1 border-b border-gray-300">
                   <Link
                     href="/account/addresses"
-                    className="flex space-x-2 w-full !hover:bg-orange-300 p-1 items-center rounded-md"
+                    className="flex space-x-2 w-full group-hover:!bg-orange-300 group-hover:!text-white duration-300  p-1 items-center rounded-md"
                   >
                     <MapPinCheck />
                     <p>ที่อยู่ของฉัน</p>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="py-2 border-b border-gray-300">
-                  <Link href="/account/orders" className="flex space-x-2">
+                <DropdownMenuItem className="group p-1 border-b border-gray-300">
+                  <Link
+                    href="/account/orders"
+                    className="flex space-x-2 w-full group-hover:!bg-orange-300 group-hover:!text-white duration-300  p-1 items-center rounded-md"
+                  >
                     <Truck />
                     <p>ออเดอร์ของฉัน</p>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="py-2 border-b border-gray-300">
-                  <Link href="/account/payments" className="flex space-x-2">
+                <DropdownMenuItem className="group p-1 border-b border-gray-300">
+                  <Link
+                    href="/account/payments"
+                    className="flex space-x-2 w-full group-hover:!bg-orange-300 group-hover:!text-white duration-300  p-1 items-center rounded-md"
+                  >
                     <DollarSign />
                     <p>ประวัติการชำระเงิน</p>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="py-2 border-b border-gray-300">
-                  <Link href="/account/review" className="flex space-x-2">
+                <DropdownMenuItem className="group p-1 border-b border-gray-300">
+                  <Link
+                    href="/account/review"
+                    className="flex space-x-2 w-full group-hover:!bg-orange-300 group-hover:!text-white duration-300  p-1 items-center rounded-md"
+                  >
                     <Star />
                     <p>รีวิวสินค้า</p>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="py-2 border-b border-gray-300">
+                <DropdownMenuItem className="group p-1 border-b border-gray-300">
                   <Link
                     href="/account/change-password"
-                    className="flex space-x-2"
+                    className="flex space-x-2 w-full group-hover:!bg-orange-300 group-hover:!text-white duration-300  p-1 items-center rounded-md"
                   >
                     <Lock />
                     <p>ตั้งค่ารหัสผ่าน</p>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="py-2">
-                  <Link href="/signout" className="flex space-x-2">
+                <DropdownMenuItem className="group p-1 border-b border-gray-300">
+                  <Link
+                    href="/signout"
+                    className="flex space-x-2 w-full group-hover:!bg-orange-300 group-hover:!text-white duration-300  p-1 items-center rounded-md"
+                  >
                     <LogOut />
                     <p>ออกจากระบบ</p>
                   </Link>
