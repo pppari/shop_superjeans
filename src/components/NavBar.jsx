@@ -21,6 +21,7 @@ export default function NavBar() {
   const getCategory = async () => {
     try {
       const res = await axios.get("/api/categories");
+      console.log(res);
       setCategories(res.data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
@@ -34,9 +35,7 @@ export default function NavBar() {
   }, []);
 
   const renderSkeleton = (cols = 5, rows = 1) => (
-    <div
-      className={`grid grid-cols-${cols} gap-6 p-6 w-[${cols * 150}px]`}
-    >
+    <div className={`grid grid-cols-${cols} gap-6 p-6 w-[${cols * 150}px]`}>
       {Array.from({ length: cols * rows }).map((_, idx) => (
         <Skeleton key={idx} className="h-6 w-24" />
       ))}
@@ -48,7 +47,9 @@ export default function NavBar() {
       {items.map((item) => (
         <NavigationMenuLink key={item._id} asChild>
           <a
-            href={`/shop?${item.subCategories ? `c=${item._id}` : `sc=${item._id}`}`}
+            href={`/shop?${
+              item.subCategories ? `c=${item._id}` : `sc=${item._id}`
+            }`}
             className="hover:bg-amber-100"
           >
             <div className="text-sm leading-none font-medium">{item.name}</div>
@@ -63,66 +64,70 @@ export default function NavBar() {
 
   return (
     <div className="hidden lg:flex justify-center py-4 bg-orange-300 text-sm">
-      <NavigationMenu>
-        <NavigationMenuList>
-          {/* All Products */}
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <a href="/shop" className="px-3 py-2">
-                สินค้าทั้งหมด
-              </a>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+        <NavigationMenu>
+          <NavigationMenuList>
+            {/* All Products */}
+            <NavigationMenuItem className={'relative'}>
+              <NavigationMenuLink asChild>
+                <a href="/shop" className="px-3 py-2">
+                  สินค้าทั้งหมด
+                </a>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
 
-          {/* All Categories Mega Menu */}
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>ประเภททั้งหมด</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {loading ? renderSkeleton(3, 2) : renderMegaMenuContent(categories)}
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+            {/* All Categories Mega Menu */}
+            <NavigationMenuItem className={'relative'}>
+              <NavigationMenuTrigger>ประเภททั้งหมด</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                {loading
+                  ? renderSkeleton(3, 2)
+                  : renderMegaMenuContent(categories)}
+              </NavigationMenuContent>
+            </NavigationMenuItem>
 
-          {/* Top-level categories */}
-          {loading
-            ? Array.from({ length: 3 }).map((_, idx) => (
-                <NavigationMenuItem key={idx}>
-                  <Skeleton className="h-6 w-24 px-3 py-2" />
-                </NavigationMenuItem>
-              ))
-            : categories.map((cat) => {
-                if (cat.subCategories?.length > 0) {
+            {/* Top-level categories */}
+            {loading
+              ? Array.from({ length: 3 }).map((_, idx) => (
+                  <NavigationMenuItem key={idx}>
+                    <Skeleton className="h-6 w-24 px-3 py-2" />
+                  </NavigationMenuItem>
+                ))
+              : categories.map((cat) => {
+                  if (cat.subCategories?.length > 0) {
+                    return (
+                      <NavigationMenuItem key={cat._id}>
+                        <NavigationMenuTrigger>
+                          {cat.name}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          {renderMegaMenuContent(cat.subCategories)}
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    );
+                  }
                   return (
                     <NavigationMenuItem key={cat._id}>
-                      <NavigationMenuTrigger>{cat.name}</NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        {renderMegaMenuContent(cat.subCategories)}
-                      </NavigationMenuContent>
+                      <NavigationMenuLink asChild>
+                        <Link href={`/shop?c=${cat._id}`} className="px-3 py-2">
+                          {cat.name}
+                        </Link>
+                      </NavigationMenuLink>
                     </NavigationMenuItem>
                   );
-                }
-                return (
-                  <NavigationMenuItem key={cat._id}>
-                    <NavigationMenuLink asChild>
-                      <Link href={`/shop?c=${cat._id}`} className="px-3 py-2">
-                        {cat.name}
-                      </Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                );
-              })}
+                })}
 
-          {/* Contact */}
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link href="/contact" className="px-3 py-2">
-                ติดต่อเรา
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
+            {/* Contact */}
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link href="/contact" className="px-3 py-2">
+                  ติดต่อเรา
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
 
-        <NavigationMenuViewport />
-      </NavigationMenu>
+          <NavigationMenuViewport />
+        </NavigationMenu>
     </div>
   );
 }
