@@ -67,20 +67,20 @@ const PaymentHistory = () => {
           filteredOrders.map((order) => (
             <>
               <Card
-                key={order._id}
+                key={order?._id}
                 className="p-4 rounded-2xl shadow-sm border border-gray-200"
               >
                 <CardContent className="p-4 space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">
-                      {dateFormat(order.order_date)}
+                      {dateFormat(order?.order_date)}
                     </span>
                   </div>
 
                   <div className="pt-2 flex justify-between text-sm text-gray-700 font-semibold">
                     <span>ช่องทางการชำระ</span>
                     <span>
-                      {order.payment_method === "promptpay" ? (
+                      {order?.payment_method === "promptpay" ? (
                         <div className="flex items-center gap-2">
                           <img
                             src="/thaiqr.jpg"
@@ -104,16 +104,16 @@ const PaymentHistory = () => {
 
                   <div className="pt-2 flex justify-between text-sm text-gray-700 font-semibold">
                     <span>ราคารวม</span>
-                    <span>{toPrice(order.amount - order.payment_fee)}</span>
+                    <span>{toPrice(order?.amount - order?.payment_fee)}</span>
                   </div>
 
                   <div className="pt-2 flex justify-between text-sm text-gray-700 font-semibold">
                     <span>ค่าธรรมเนียม</span>
-                    <span>{toPrice(order.payment_fee)}</span>
+                    <span>{toPrice(order?.payment_fee)}</span>
                   </div>
                   <div className="border-t border-gray-200 pt-2 flex justify-between text-sm text-gray-700 font-semibold">
                     <span>รวมทั้งหมด</span>
-                    <span>{toPrice(order.amount)}</span>
+                    <span>{toPrice(order?.amount)}</span>
                   </div>
 
                   <CardFooter>
@@ -140,7 +140,7 @@ const PaymentHistory = () => {
                               Order ID:
                             </span>
                             <span className="text-right break-all">
-                              {order._id}
+                              {order?._id}
                             </span>
                           </div>
 
@@ -149,7 +149,7 @@ const PaymentHistory = () => {
                               วันที่สั่งซื้อ:
                             </span>
                             <span className="text-right">
-                              {dateFormat(order.order_date)}
+                              {dateFormat(order?.order_date)}
                             </span>
                           </div>
                           <div className="pt-2 flex justify-between text-sm font-medium">
@@ -157,7 +157,7 @@ const PaymentHistory = () => {
                               ช่องทางการชำระ
                             </span>
                             <span>
-                              {order.payment_method === "promptpay" ? (
+                              {order?.payment_method === "promptpay" ? (
                                 <div className="flex items-center gap-2">
                                   <img
                                     src="/thaiqr.jpg"
@@ -187,17 +187,17 @@ const PaymentHistory = () => {
                             <div className="flex justify-between text-sm text-gray-700 font-semibold">
                               <span>ราคารวม</span>
                               <span>
-                                {toPrice(order.amount - order.payment_fee)}
+                                {toPrice(order?.amount - order?.payment_fee)}
                               </span>
                             </div>
 
                             <div className="pt-2 flex justify-between text-sm text-gray-700 font-semibold">
                               <span>ค่าธรรมเนียม</span>
-                              <span>{toPrice(order.payment_fee)}</span>
+                              <span>{toPrice(order?.payment_fee)}</span>
                             </div>
                             <div className="border-t border-gray-200 pt-2 flex justify-between text-sm text-gray-700 font-semibold">
                               <span>รวมทั้งหมด</span>
-                              <span>{toPrice(order.amount)}</span>
+                              <span>{toPrice(order?.amount)}</span>
                             </div>
                           </div>
                         </div>
@@ -207,31 +207,31 @@ const PaymentHistory = () => {
                             รายการสินค้า
                           </h4>
                           <div className="divide-y text-sm border p-2 rounded shadow-sm">
-                            {order.items && order.items.length > 0 ? (
-                              order.items.map((item, i) => (
+                            {order?.items && order?.items.length > 0 ? (
+                              order?.items.map((item, i) => (
                                 <div
-                                  key={item._id}
+                                  key={item?._id}
                                   className="flex items-center gap-3 border-gray-200"
                                 >
                                   <div className="flex-1">
                                     <Link
-                                      href={`/product/${item.productId._id}`}
+                                      href={`/product/${item?.productId?._id}`}
                                       target="_blank"
                                       className="font-medium text-gray-900"
                                     >
-                                      {item.productId?.name ||
+                                      {item?.productId?.name ||
                                         "สินค้าถูกลบไปแล้ว"}
                                     </Link>
                                     <p className="text-xs text-gray-500">
-                                      สี: {item.productColorId.name}
+                                      สี: {item?.productColorId?.name}
                                     </p>
                                     <p className="text-xs text-gray-500">
-                                      จำนวน: {item.quantity} ชิ้น | ราคา/ชิ้น:{" "}
+                                      จำนวน: {item?.quantity} ชิ้น | ราคา/ชิ้น:{" "}
                                       {item.price.toLocaleString()}
                                     </p>
                                   </div>
                                   <div className="text-sm font-bold text-right whitespace-nowrap">
-                                    {toPrice(item.total)}
+                                    {toPrice(item?.total)}
                                   </div>
                                 </div>
                               ))
