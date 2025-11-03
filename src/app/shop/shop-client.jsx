@@ -50,6 +50,8 @@ export default function ShopClient() {
       else if (sc) url += `?sc=${sc}`;
 
       const response = await axios.get(url);
+      console.log(response.data);
+
       setProducts(response.data);
     } catch (e) {
       console.error(e);
