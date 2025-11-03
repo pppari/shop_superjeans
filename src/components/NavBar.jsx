@@ -10,7 +10,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -63,70 +62,66 @@ export default function NavBar() {
 
   return (
     <div className="hidden lg:flex justify-center py-4 bg-orange-300 text-sm">
-        <NavigationMenu>
-          <NavigationMenuList>
-            {/* All Products */}
-            <NavigationMenuItem className={'relative'}>
-              <NavigationMenuLink asChild>
-                <a href="/shop" className="px-3 py-2">
-                  สินค้าทั้งหมด
-                </a>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+      <NavigationMenu viewport={false}>
+        <NavigationMenuList>
+          {/* All Products */}
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <a href="/shop" className="px-3 py-2">
+                สินค้าทั้งหมด
+              </a>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
 
-            {/* All Categories Mega Menu */}
-            <NavigationMenuItem className={'relative'}>
-              <NavigationMenuTrigger>ประเภททั้งหมด</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                {loading
-                  ? renderSkeleton(3, 2)
-                  : renderMegaMenuContent(categories)}
-              </NavigationMenuContent>
-            </NavigationMenuItem>
+          {/* All Categories Mega Menu */}
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>ประเภททั้งหมด</NavigationMenuTrigger>
+            <NavigationMenuContent className="left-1/2 -translate-x-1/2">
+              {loading
+                ? renderSkeleton(3, 2)
+                : renderMegaMenuContent(categories)}
+            </NavigationMenuContent>
+          </NavigationMenuItem>
 
-            {/* Top-level categories */}
-            {loading
-              ? Array.from({ length: 3 }).map((_, idx) => (
-                  <NavigationMenuItem key={idx}>
-                    <Skeleton className="h-6 w-24 px-3 py-2" />
-                  </NavigationMenuItem>
-                ))
-              : categories.map((cat) => {
-                  if (cat.subCategories?.length > 0) {
-                    return (
-                      <NavigationMenuItem key={cat._id}>
-                        <NavigationMenuTrigger>
-                          {cat.name}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          {renderMegaMenuContent(cat.subCategories)}
-                        </NavigationMenuContent>
-                      </NavigationMenuItem>
-                    );
-                  }
+          {/* Top-level categories */}
+          {loading
+            ? Array.from({ length: 3 }).map((_, idx) => (
+                <NavigationMenuItem key={idx}>
+                  <Skeleton className="h-6 w-24 px-3 py-2" />
+                </NavigationMenuItem>
+              ))
+            : categories.map((cat) => {
+                if (cat.subCategories?.length > 0) {
                   return (
                     <NavigationMenuItem key={cat._id}>
-                      <NavigationMenuLink asChild>
-                        <Link href={`/shop?c=${cat._id}`} className="px-3 py-2">
-                          {cat.name}
-                        </Link>
-                      </NavigationMenuLink>
+                      <NavigationMenuTrigger>{cat.name}</NavigationMenuTrigger>
+                      <NavigationMenuContent className="left-1/2 -translate-x-1/2">
+                        {renderMegaMenuContent(cat.subCategories)}
+                      </NavigationMenuContent>
                     </NavigationMenuItem>
                   );
-                })}
+                }
+                return (
+                  <NavigationMenuItem key={cat._id}>
+                    <NavigationMenuLink asChild>
+                      <Link href={`/shop?c=${cat._id}`} className="px-3 py-2">
+                        {cat.name}
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                );
+              })}
 
-            {/* Contact */}
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link href="/contact" className="px-3 py-2">
-                  ติดต่อเรา
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-
-          <NavigationMenuViewport />
-        </NavigationMenu>
+          {/* Contact */}
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link href="/contact" className="px-3 py-2">
+                ติดต่อเรา
+              </Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
     </div>
   );
 }
