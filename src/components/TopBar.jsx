@@ -43,7 +43,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { useCartStore } from "@/store/useCartStore";
 
 export default function Topbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userData, setUserData] = useState({});
   const token = getToken();
   const cartCount = useCartStore((state) => state.count);
@@ -108,9 +108,15 @@ export default function Topbar() {
                   <UserCircle className="w-5 h-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem className="py-2 border-b border-gray-300">
-                  <Link href="/account/addresses" className="flex space-x-2">
+              <DropdownMenuContent
+                align="end"
+                className={"border-none max-w-xs w-full !shadow-2xs"}
+              >
+                <DropdownMenuItem className="group p-1 border-b border-gray-300">
+                  <Link
+                    href="/account/addresses"
+                    className="flex space-x-2 w-full !hover:bg-orange-300 p-1 items-center rounded-md"
+                  >
                     <MapPinCheck />
                     <p>ที่อยู่ของฉัน</p>
                   </Link>
@@ -134,15 +140,18 @@ export default function Topbar() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="py-2 border-b border-gray-300">
-                  <Link href="/account/change-password" className="flex space-x-2">
+                  <Link
+                    href="/account/change-password"
+                    className="flex space-x-2"
+                  >
                     <Lock />
                     <p>ตั้งค่ารหัสผ่าน</p>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="py-2">
-                  <Link href="/signout"className="flex space-x-2">
-                  <LogOut />
-                  <p>ออกจากระบบ</p>
+                  <Link href="/signout" className="flex space-x-2">
+                    <LogOut />
+                    <p>ออกจากระบบ</p>
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -283,8 +292,8 @@ export default function Topbar() {
                           href="/account/change-password"
                           className="flex space-x-4 items-center py-4 px-2 border-b border-gray-300"
                         >
-                    <Lock />
-                    <p>ตั้งค่ารหัสผ่าน</p>
+                          <Lock />
+                          <p>ตั้งค่ารหัสผ่าน</p>
                         </Link>
                         <Link
                           href="/signout"

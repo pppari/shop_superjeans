@@ -25,8 +25,6 @@ export default function ShopClient() {
   const c = searchParams.get("c");
   const sc = searchParams.get("sc");
 
-  console.log(r, c, sc);
-
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [room, setRoom] = useState(null);
