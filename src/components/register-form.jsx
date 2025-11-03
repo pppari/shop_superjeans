@@ -29,7 +29,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import { CheckCircle, Eye, EyeOff } from "lucide-react";
+import { CheckCircle, Eye, EyeOff, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Checkbox } from "./ui/checkbox";
 import { Dialog } from "@radix-ui/react-dialog";
