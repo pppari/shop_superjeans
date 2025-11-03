@@ -22,11 +22,17 @@ const NewProduct = () => {
       const url = "/api/products";
       const response = await axios.get(url);
 
+      console.log(response);
+
+      // เรียงตามวันที่สร้าง (ใหม่สุดก่อน)
       const latestProducts = response.data
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 6);
+        .slice(0, 6); //จำนวนสินค้าที่จะเเสดง
 
-      setRecProd(latestProducts);
+      // จากนั้นเรียงสินค้าที่ได้ตาม "ราคา จากน้อย → มาก"
+      const sortedByPrice = latestProducts.sort((a, b) => a.price - b.price);
+
+      setRecProd(sortedByPrice);
     } catch (e) {
       console.error(e);
       setError("โหลดสินค้าล้มเหลว");
