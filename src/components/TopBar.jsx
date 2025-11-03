@@ -101,7 +101,7 @@ export default function Topbar() {
             <Heart className="w-5 h-5" />
           </Link>
 
-          {isLoggedIn ? (
+          {/* {isLoggedIn ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -175,15 +175,16 @@ export default function Topbar() {
             >
               <UserCircle className="w-5 h-5" />
             </Link>
-          )}
+          )} */}
         </div>
 
         {/* Mobile Drawer Trigger */}
-        <div className="lg:hidden">
+        <div className="ml-4">
           <Drawer direction="right">
             <DrawerTrigger asChild>
               <Button variant="outline" size="icon" aria-label="Open menu">
-                <Menu />
+                <Menu className="block lg:hidden" />
+                <UserCircle className="w-5 h-5" />
               </Button>
             </DrawerTrigger>
             <DrawerContent>
