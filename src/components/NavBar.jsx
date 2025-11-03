@@ -21,7 +21,6 @@ export default function NavBar() {
   const getCategory = async () => {
     try {
       const res = await axios.get("/api/categories");
-      console.log(res);
       setCategories(res.data);
     } catch (error) {
       console.error("Failed to fetch categories:", error);

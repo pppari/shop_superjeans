@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -16,7 +16,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
 
 import { Button } from "@/components/ui/button";
 import { colorImages, mainColorImg } from "@/lib/imagePath";
@@ -44,7 +44,8 @@ function SingleProduct() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [review, setReview] = useState([]);
-  const [average, setAverage] = useState(0)
+  const [average, setAverage] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     if (!id) return;
@@ -131,8 +132,9 @@ function SingleProduct() {
                 <Card
                   key={idx}
                   onClick={() => handleThumbnailClick(img)}
-                  className={`w-20 h-20 flex-shrink-0 bg-white overflow-hidden border-gray-100 rounded cursor-pointer ${selectedImage === img ? "ring-2 ring-black" : ""
-                    }`}
+                  className={`w-20 h-20 flex-shrink-0 bg-white overflow-hidden border-gray-100 rounded cursor-pointer ${
+                    selectedImage === img ? "ring-2 ring-black" : ""
+                  }`}
                 >
                   <img
                     src={colorImages(product._id, selectedColor._id, img)}
@@ -168,7 +170,9 @@ function SingleProduct() {
             <CardContent className="space-y-4 p-0">
               <div className="flex space-x-2">
                 {product.subCategoryId ? (
-                  <Badge variant="secondary">{product.subCategoryId.name}</Badge>
+                  <Badge variant="secondary">
+                    {product.subCategoryId.name}
+                  </Badge>
                 ) : null}
                 <Badge variant="secondary">{product.categoryId.name}</Badge>
                 <Badge variant="secondary">{product.roomId.name}</Badge>
@@ -184,11 +188,7 @@ function SingleProduct() {
                   <Skeleton className="w-24 h-6" />
                 )}
               </p>
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full mb-4"
-              >
+              <Accordion type="single" collapsible className="w-full mb-4">
                 <AccordionItem value="select-color">
                   <AccordionTrigger className="text-base font-bold border border-gray-300 px-4 items-center">
                     เลือกสี
@@ -201,10 +201,11 @@ function SingleProduct() {
                             key={color._id}
                             onClick={() => setSelectedColor(color)}
                             src={mainColorImg(product._id, color.main_img)}
-                            className={`w-20 h-20 cursor-pointer transform rounded hover:shadow-sm hover:border hover:border-gray-200 ${selectedColor && selectedColor._id === color._id
-                              ? "ring-1 ring-black"
-                              : ""
-                              }`}
+                            className={`w-20 h-20 cursor-pointer transform rounded hover:shadow-sm hover:border hover:border-gray-200 ${
+                              selectedColor && selectedColor._id === color._id
+                                ? "ring-1 ring-black"
+                                : ""
+                            }`}
                             alt={`Color: ${color.color_code}`}
                           />
                         ))
@@ -227,7 +228,12 @@ function SingleProduct() {
 
               {selectedColor && selectedColor.quantity <= 0 ? (
                 <>
-                  <Button className="w-full rounded-full" size="lg" variant='secondary' disabled>
+                  <Button
+                    className="w-full rounded-full"
+                    size="lg"
+                    variant="secondary"
+                    disabled
+                  >
                     สินค้าหมด
                   </Button>
                 </>
@@ -246,6 +252,7 @@ function SingleProduct() {
                       toast.success("เพิ่มสินค้าในตะกร้าสำเร็จ");
                     } catch (err) {
                       console.error(err);
+                      router.push("/signin");
                       toast.error("ไม่สามารถเพิ่มสินค้าในตะกร้าได้");
                     }
                   }}
@@ -291,10 +298,11 @@ function SingleProduct() {
       <Separator />
       {/* รีวิวสินค้า */}
       <div className="mt-8">
-        <p className="text-xl font-semibold mb-4">รีวิวสินค้า ({review.length || 0})</p>
+        <p className="text-xl font-semibold mb-4">
+          รีวิวสินค้า ({review.length || 0})
+        </p>
 
         <div className="flex flex-col space-y-4">
-
           <Carousel>
             <CarouselContent>
               {review.length > 0 ? (
@@ -317,10 +325,14 @@ function SingleProduct() {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm leading-relaxed">{item.message}</p>
+                        <p className="text-sm leading-relaxed">
+                          {item.message}
+                        </p>
                       </CardContent>
                       <CardFooter>
-                        <p className="text-sm text-gray-500">{dateFormat(item.created_at)}</p>
+                        <p className="text-sm text-gray-500">
+                          {dateFormat(item.created_at)}
+                        </p>
                       </CardFooter>
                     </Card>
                   </CarouselItem>
@@ -328,12 +340,10 @@ function SingleProduct() {
               ) : (
                 <p className="text-center text-gray-400">ยังไม่มีรีวิว</p>
               )}
-
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
-
         </div>
       </div>
     </div>

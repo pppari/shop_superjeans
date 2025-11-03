@@ -47,7 +47,7 @@ const WishlistPage = () => {
           price: item.productId.price,
           main_img: item.main_img || '/placeholder-product.png' // Fallback image
         }));
-        console.log("Formatted Wishlist:", formattedWishlist);
+        // console.log("Formatted Wishlist:", formattedWishlist);
         setWishlist(formattedWishlist);
       } else {
         toast.error("Failed to fetch wishlist");

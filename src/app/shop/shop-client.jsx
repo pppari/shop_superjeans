@@ -25,6 +25,8 @@ export default function ShopClient() {
   const c = searchParams.get("c");
   const sc = searchParams.get("sc");
 
+  console.log(r, c, sc);
+
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [room, setRoom] = useState(null);
@@ -113,6 +115,18 @@ export default function ShopClient() {
   };
 
   const filteredProducts = useMemo(() => {
+    const noFilters =
+      !r &&
+      !c &&
+      !sc &&
+      selectedCategories.length === 0 &&
+      selectedSubCategories.length === 0 &&
+      selectedRooms.length === 0 &&
+      priceRange[0] === 1000 &&
+      priceRange[1] === 100000; // ตรวจว่าเป็น default range ของคุณ
+
+    if (noFilters) return products;
+
     return products.filter((product) => {
       const inCategory = c
         ? product.categoryId?._id === c
@@ -132,7 +146,16 @@ export default function ShopClient() {
 
       return inCategory && inSubCategory && inRoom && inPriceRange;
     });
-  }, [products, c, selectedCategories, selectedSubCategories, selectedRooms, priceRange]);
+  }, [
+    products,
+    r,
+    c,
+    sc,
+    selectedCategories,
+    selectedSubCategories,
+    selectedRooms,
+    priceRange,
+  ]);
 
   // ถ้า query string เปลี่ยน ให้ refetch
   useEffect(() => {

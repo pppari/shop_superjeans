@@ -21,7 +21,6 @@ function ShopProduct({ products, shopTitle }) {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
-
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const handlePrevPage = () => {
@@ -44,7 +43,11 @@ function ShopProduct({ products, shopTitle }) {
         {currentProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {currentProducts.map((product, index) => (
-            <ProductCard key={index} product={product} imageMode="main-color" />
+              <ProductCard
+                key={index}
+                product={product}
+                imageMode="main-color"
+              />
             ))}
           </div>
         ) : (
