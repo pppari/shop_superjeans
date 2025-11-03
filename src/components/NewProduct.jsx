@@ -24,7 +24,7 @@ const NewProduct = () => {
 
       const latestProducts = response.data
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 6);
+        .slice(0, 3);
 
       setRecProd(latestProducts);
     } catch (e) {
