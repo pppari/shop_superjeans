@@ -1,0 +1,14 @@
+// app/account/review/page.jsx
+import { Suspense } from "react";
+import ReviewClient from "./review-client";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="p-4">Loading reviews…</div>}>
+      <ReviewClient />
+    </Suspense>
+  );
+}
